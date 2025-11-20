@@ -50,7 +50,7 @@ func (h *UserHandler) GetJWT(w http.ResponseWriter, r *http.Request) {
 	})
 
 	accessToken := struct {
-		AccessToken string `json:"acess_token`
+		AccessToken string `json:"acess_token"`
 	}{
 		AccessToken: tokenString,
 	}
@@ -68,7 +68,7 @@ func (h *UserHandler) GetJWT(w http.ResponseWriter, r *http.Request) {
 // @Produce		json
 // @Param		request  body dto.CreateUserInput true "user request"
 // @Success		201
-// @Failure 	500		{object} error
+// @Failure 500 {object} Error
 // @Router		/users [post]
 
 func (h *UserHandler) Create(w http.ResponseWriter, r *http.Request) {
@@ -81,11 +81,15 @@ func (h *UserHandler) Create(w http.ResponseWriter, r *http.Request) {
 	u, err := entity.NewUser(user.Name, user.Email, user.Password)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
+		error := Error{Message: err.Error()}
+		json.NewEncoder(w).Encode(error)
 		return
 	}
 	err = h.UserDB.Create(u)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
+		error := Error{Message: err.Error()}
+		json.NewEncoder(w).Encode(error)
 		return
 	}
 	w.WriteHeader(http.StatusCreated)

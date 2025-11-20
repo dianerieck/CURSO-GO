@@ -18,7 +18,7 @@ import (
 
 // @title           Go Expert Example API
 // @version         1.0
-// @description     Product API with auhtentication.
+// @description     Product API with authentication.
 // @termsOfService  http://swagger.io/terms/
 
 // @contact.name   Diane Elo Rieck
@@ -31,7 +31,7 @@ import (
 // @host      localhost:8080
 // @BasePath  /
 
-// @securityDefinitions.apikey ApiKeyAuth
+// @SecurityDefinitions.ApiKey ApiKeyAuth
 // @in header
 // @name Authorization
 
@@ -84,3 +84,4 @@ func main() {
 //}
 
 //usar swag init no terminal para iniciar o swager e criar a pasta docs
+//http://localhost:8080/docs/index.html
